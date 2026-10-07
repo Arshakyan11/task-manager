@@ -47,8 +47,8 @@ export function TaskItem({ task, onToggle, onEdit, onDelete }: TaskItemProps) {
 
   if (isEditing) {
     return (
-      <li>
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+      <li className="editing">
+        <div className="task-edit-input-wrapper">
           <input
             type="text"
             value={editTitle}
@@ -56,7 +56,7 @@ export function TaskItem({ task, onToggle, onEdit, onDelete }: TaskItemProps) {
             onKeyDown={handleKeyDown}
             autoFocus
           />
-          {error && <span className="error" style={{ fontSize: "0.75rem" }}>{error}</span>}
+          {error && <span className="error">{error}</span>}
         </div>
         <div className="task-actions">
           <button className="save-button" onClick={handleSave}>

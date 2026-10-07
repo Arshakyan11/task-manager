@@ -228,6 +228,8 @@ h1 {
   transition: all 0.15s ease;
 }
 
+
+
 .task-list li:hover {
   background: var(--color-bg-hover);
   border-color: var(--color-border-hover);
@@ -235,6 +237,38 @@ h1 {
 
 .task-list li.completed {
   opacity: 0.6;
+}
+
+.task-list li.editing {
+  flex-wrap: wrap;
+}
+
+.task-edit-input-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.task-edit-input-wrapper .error {
+  font-size: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .task-list li.editing {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .task-edit-input-wrapper {
+    width: 100%;
+  }
+
+  .task-list li.editing .task-actions {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
 }
 
 .task-checkbox {
