@@ -6,7 +6,8 @@ Todo List application successfully implemented following test-driven development
 ## Implementation Status: ✅ COMPLETE
 
 ### Test Results
-- **25/25 tests passing** ✅
+- **30/30 unit tests passing** ✅
+- **11/11 E2E tests passing** ✅
 - **6 test suites** ✅
 - **All functional requirements covered** ✅
 - **All edge cases handled** ✅
@@ -34,9 +35,10 @@ Todo List application successfully implemented following test-driven development
 - ✅ `src/utils/storage.test.ts` - 8 tests
 - ✅ `src/hooks/useTasks.test.ts` - 4 tests
 - ✅ `src/components/TaskForm.test.tsx` - 2 tests
-- ✅ `src/components/TaskItem.test.tsx` - 1 test
+- ✅ `src/components/TaskItem.test.tsx` - 6 tests
 - ✅ `src/components/FilterBar.test.tsx` - 4 tests
 - ✅ `src/App.test.tsx` - 6 tests
+- ✅ `tests/e2e/task-manager.spec.ts` - 11 E2E tests
 
 ## Features Implemented
 
@@ -56,7 +58,9 @@ Todo List application successfully implemented following test-driven development
 - Inline edit mode activated by Edit button
 - Current title pre-filled
 - Save/Cancel buttons
-- Same validation as adding tasks
+- Keyboard shortcuts: Enter to save, Escape to cancel
+- Empty/whitespace title validation with error message
+- Error clears when user types valid text
 
 ### ✅ F4: Toggle Task Completion
 - Checkbox toggles completion status
@@ -82,8 +86,9 @@ Todo List application successfully implemented following test-driven development
 
 ## Edge Cases Handled
 
-- ✅ Empty task titles rejected
-- ✅ Whitespace-only titles rejected
+- ✅ Empty task titles rejected (add and edit)
+- ✅ Whitespace-only titles rejected (add and edit)
+- ✅ Empty edit validation keeps edit mode open with error message
 - ✅ Malformed localStorage data (app starts fresh)
 - ✅ Missing localStorage (works in-memory)
 - ✅ Invalid task structure validation
@@ -115,9 +120,10 @@ Todo List application successfully implemented following test-driven development
 
 **Validation**
 - Trim whitespace before validation
-- Reject empty strings
+- Reject empty strings (add and edit)
 - Show inline error messages
 - Clear errors on user input
+- Edit mode stays open when validation fails
 
 ### TypeScript
 - Strong typing throughout
@@ -128,7 +134,7 @@ Todo List application successfully implemented following test-driven development
 ### Accessibility
 - Semantic HTML elements
 - ARIA labels for screen readers
-- Keyboard navigation support
+- Keyboard navigation support (Enter/Escape for editing)
 - Visible focus indicators
 - Checkbox for completion toggle
 
@@ -138,7 +144,7 @@ Todo List application successfully implemented following test-driven development
 2. ✅ Wrote tests BEFORE implementation
 3. ✅ Confirmed tests failed appropriately
 4. ✅ Implemented features to pass tests
-5. ✅ All 25 tests passing
+5. ✅ All 30 unit tests + 11 E2E tests passing
 6. ✅ Added styling for usability
 7. ✅ Dev server running
 

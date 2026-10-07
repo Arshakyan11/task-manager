@@ -81,6 +81,65 @@ test.describe('Task Manager', () => {
     await expect(page.locator('.task-list li')).not.toContainText('Original task');
   });
 
+  test('should save edited task when pressing Enter', async ({ page }) => {
+    // Add a task
+    await page.fill('input[type="text"]', 'Original task');
+    await page.press('input[type="text"]', 'Enter');
+
+    // Click edit
+    await page.locator('.task-list li').locator('button:has-text("Edit")').click();
+
+    // Edit the task and press Enter
+    const editInput = page.locator('.task-list li input[type="text"]');
+    await editInput.fill('Updated with Enter');
+    await editInput.press('Enter');
+
+    // Verify updated
+    await expect(page.locator('.task-list li')).toContainText('Updated with Enter');
+    await expect(page.locator('.task-list li')).not.toContainText('Original task');
+  });
+
+  test('should cancel edit when pressing Escape', async ({ page }) => {
+    // Add a task
+    await page.fill('input[type="text"]', 'Original task');
+    await page.press('input[type="text"]', 'Enter');
+
+    // Click edit
+    await page.locator('.task-list li').locator('button:has-text("Edit")').click();
+
+    // Start editing and press Escape
+    const editInput = page.locator('.task-list li input[type="text"]');
+    await editInput.fill('Changed text');
+    await editInput.press('Escape');
+
+    // Verify not updated
+    await expect(page.locator('.task-list li')).toContainText('Original task');
+    await expect(page.locator('.task-list li')).not.toContainText('Changed text');
+  });
+
+  test('should show validation error for empty edited task', async ({ page }) => {
+    // Add a task
+    await page.fill('input[type="text"]', 'Original task');
+    await page.press('input[type="text"]', 'Enter');
+
+    // Click edit
+    await page.locator('.task-list li').locator('button:has-text("Edit")').click();
+
+    // Clear the input and try to save
+    const editInput = page.locator('.task-list li input[type="text"]');
+    await editInput.fill('');
+    await page.locator('.task-list li button:has-text("Save")').click();
+
+    // Verify error is shown and edit mode stays open
+    await expect(page.locator('.task-list li .error')).toBeVisible();
+    await expect(page.locator('.task-list li .error')).toContainText('Task title cannot be empty');
+    await expect(editInput).toBeVisible();
+
+    // Type valid text and verify error disappears
+    await editInput.fill('Valid task');
+    await expect(page.locator('.task-list li .error')).not.toBeVisible();
+  });
+
   test('should delete a task', async ({ page }) => {
     // Add tasks
     await page.fill('input[type="text"]', 'Task to keep');

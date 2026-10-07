@@ -46,4 +46,120 @@ describe("TaskItem", () => {
     await user.click(screen.getByRole("button", { name: /save/i }));
     expect(handleEdit).not.toHaveBeenCalled();
   });
+
+  it("saves task when Enter is pressed during edit", async () => {
+    const user = userEvent.setup();
+    const handleEdit = vi.fn();
+
+    render(
+      <TaskItem
+        task={mockTask}
+        onToggle={vi.fn()}
+        onEdit={handleEdit}
+        onDelete={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /edit/i }));
+    const input = screen.getByRole("textbox");
+    await user.clear(input);
+    await user.type(input, "Updated with Enter");
+    await user.keyboard("{Enter}");
+
+    expect(handleEdit).toHaveBeenCalledWith(mockTask.id, "Updated with Enter");
+  });
+
+  it("cancels edit when Escape is pressed", async () => {
+    const user = userEvent.setup();
+    const handleEdit = vi.fn();
+
+    render(
+      <TaskItem
+        task={mockTask}
+        onToggle={vi.fn()}
+        onEdit={handleEdit}
+        onDelete={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /edit/i }));
+    const input = screen.getByRole("textbox");
+    await user.clear(input);
+    await user.type(input, "Changed text");
+    await user.keyboard("{Escape}");
+
+    expect(handleEdit).not.toHaveBeenCalled();
+    expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+  });
+
+  it("shows validation error when trying to save empty title", async () => {
+    const user = userEvent.setup();
+    const handleEdit = vi.fn();
+
+    render(
+      <TaskItem
+        task={mockTask}
+        onToggle={vi.fn()}
+        onEdit={handleEdit}
+        onDelete={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /edit/i }));
+    const input = screen.getByRole("textbox");
+    await user.clear(input);
+    await user.click(screen.getByRole("button", { name: /save/i }));
+
+    expect(screen.getByText(/task title cannot be empty/i)).toBeInTheDocument();
+    expect(handleEdit).not.toHaveBeenCalled();
+    expect(input).toBeInTheDocument();
+  });
+
+  it("clears validation error when user types valid text", async () => {
+    const user = userEvent.setup();
+    const handleEdit = vi.fn();
+
+    render(
+      <TaskItem
+        task={mockTask}
+        onToggle={vi.fn()}
+        onEdit={handleEdit}
+        onDelete={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /edit/i }));
+    const input = screen.getByRole("textbox");
+    await user.clear(input);
+    await user.click(screen.getByRole("button", { name: /save/i }));
+
+    expect(screen.getByText(/task title cannot be empty/i)).toBeInTheDocument();
+
+    await user.type(input, "Valid task");
+
+    expect(screen.queryByText(/task title cannot be empty/i)).not.toBeInTheDocument();
+  });
+
+  it("shows validation error when pressing Enter with empty title", async () => {
+    const user = userEvent.setup();
+    const handleEdit = vi.fn();
+
+    render(
+      <TaskItem
+        task={mockTask}
+        onToggle={vi.fn()}
+        onEdit={handleEdit}
+        onDelete={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole("button", { name: /edit/i }));
+    const input = screen.getByRole("textbox");
+    await user.clear(input);
+    await user.keyboard("{Enter}");
+
+    expect(screen.getByText(/task title cannot be empty/i)).toBeInTheDocument();
+    expect(handleEdit).not.toHaveBeenCalled();
+    expect(input).toBeInTheDocument();
+  });
 });

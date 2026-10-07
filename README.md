@@ -7,7 +7,7 @@ A todo list application built for junior developer recruitment, demonstrating Re
 ## Features
 
 - **Add tasks** - Create new tasks with validation
-- **Edit tasks** - Inline editing with save/cancel
+- **Edit tasks** - Inline editing with save/cancel, keyboard shortcuts (Enter to save, Escape to cancel)
 - **Toggle completion** - Mark tasks as complete or active
 - **Delete tasks** - Remove tasks permanently
 - **Filter views** - View all, active, or completed tasks
@@ -118,15 +118,15 @@ tests/
 
 ### Unit & Integration Tests
 
-- **25 tests** across 6 Vitest test suites
+- **30 tests** across 6 Vitest test suites
 - All functional requirements covered
-- Edge cases covered, including empty input and malformed localStorage data
+- Edge cases covered, including empty input, empty edit validation, and malformed localStorage data
 - React component and hook behavior tested with React Testing Library
 
 ### End-to-End Tests
 
-- **8 Playwright E2E tests**
-- Covers adding, editing, deleting, completing, filtering, validation, and persistence
+- **11 Playwright E2E tests**
+- Covers adding, editing (including keyboard shortcuts), deleting, completing, filtering, validation, and persistence
 - Browser flows verified in Chromium
 
 ## Architecture Highlights
@@ -144,7 +144,7 @@ This project was built using **test-driven development (TDD)**:
 1. Wrote functional specification (SPEC.md)
 2. Wrote failing tests for all requirements
 3. Implemented features to pass tests
-4. All 25 tests passing with all functional requirements covered
+4. All 30 tests passing with all functional requirements covered
 
 ## AI-Assisted Development
 
