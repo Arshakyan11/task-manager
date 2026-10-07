@@ -23,3 +23,19 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Local screenshots / test artifacts
+screenshots/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+
+# Playwright test artifacts
+test-results/
+playwright-report/
+
+# Local AI/tooling metadata
+.codemie/

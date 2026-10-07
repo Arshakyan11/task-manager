@@ -148,6 +148,8 @@ interface UseTasksReturn {
 **App.tsx**
 - Top-level composition
 - No state (delegates to useTasks hook)
+- Contains inline empty state rendering with context-aware messages
+- Maps filteredTasks to TaskItem components
 
 **TaskForm.tsx**
 - Controlled input for adding tasks
@@ -163,13 +165,6 @@ interface UseTasksReturn {
 **FilterBar.tsx**
 - Three filter buttons
 - Highlights active filter
-
-**TaskList.tsx** (optional wrapper)
-- Maps filteredTasks to TaskItem components
-- Shows empty state when needed
-
-**EmptyState.tsx** (optional)
-- Context-aware message based on current filter
 
 ## Accessibility Requirements
 - Semantic HTML (button, input, checkbox, ul/li)
