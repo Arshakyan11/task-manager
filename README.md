@@ -2,6 +2,8 @@
 
 A todo list application built for junior developer recruitment, demonstrating React, TypeScript, test-driven development, and clean code practices.
 
+**Live Demo:** https://task-manager-reuters.netlify.app/
+
 ## Features
 
 - **Add tasks** - Create new tasks with validation
