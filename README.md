@@ -27,8 +27,8 @@ A todo list application built for junior developer recruitment, demonstrating Re
 
 ### Prerequisites
 
-- Node.js (v18 or higher recommended)
-- npm (v9 or higher recommended)
+- Node.js (v20.19+ recommended)
+- npm (v10+ recommended)
 
 ### Installation
 
@@ -64,6 +64,12 @@ Run tests with UI:
 
 ```bash
 npm run test:ui
+```
+
+Run end-to-end tests:
+
+```bash
+npm run test:e2e
 ```
 
 ### Production Build
