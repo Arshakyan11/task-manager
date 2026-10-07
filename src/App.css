@@ -228,7 +228,9 @@ h1 {
   transition: all 0.15s ease;
 }
 
-
+.task-list li.editing {
+  align-items: flex-start;
+}
 
 .task-list li:hover {
   background: var(--color-bg-hover);
